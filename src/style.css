@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Arvo|Lobster");
+body {
+  height: 700px;
+  background: radial-gradient(ellipse, green, yellow 20%, green 50%, red 99%);
+  color: white;
+  text-shadow: 2px 2px 5px green;
+  text-align: center;
+  font-family: "Arvo", serif;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 100% 120px 300px;
+  grid-template-columns: 210px 210px;
+  grid-gap: 30px 100px;
+  justify-content: center;
+}
+
+h1 {
+  font-family: "Lobster", "Abril Fatface", "Arvo", cursive;
+  box-shadow: 1px 1px 8px 2px black;
+  border: green 5px double;
+  border-radius: 20px 5px;
+  background-color: #64dd17;
+  color: red;
+  background-image: radial-gradient(#b4ff1e 20%, yellow 40%, green 80%);
+  grid-column: 1/3;
+}
+
+.length {
+  display: grid;
+  grid-template-rows: 50px 30px;
+  grid-template-columns: 50px 20px 50px;
+  grid-gap: 10px 20px;
+  justify-content: center;
+  box-shadow: 1px 1px 8px 2px black;
+  border: green 5px double;
+  border-radius: 20px 5px;
+  background-color: #64dd17;
+}
+
+.second-row {
+  grid-column: 2/3;
+}
+
+.length:nth-child(2) {
+  border-radius: 0 50%;
+}
+.length:nth-child(2) button {
+  border-radius: 5px 20px;
+}
+
+.length:nth-child(3) {
+  border-radius: 50% 0;
+}
+.length:nth-child(3) button {
+  border-radius: 20px 5px;
+}
+
+.first-row {
+  grid-column: 1/4;
+}
+
+.time {
+  box-shadow: 1px 1px 8px 2px black;
+  border: green 5px double;
+  border-radius: 25%;
+  background-color: #64dd17;
+  grid-column: 1/3;
+  position: relative;
+}
+
+button {
+  font-family: "Arvo", serif;
+  transition: 0.5s;
+  color: #ff3d00;
+  box-shadow: 1px 1px 8px 2px black;
+  border: green thin solid;
+  border-radius: 10px;
+  background-color: #eeff41;
+}
+button:hover {
+  cursor: pointer;
+  background: yellow;
+  color: #f50057;
+  border-color: orange;
+}
+button:active {
+  box-shadow: none;
+  border-color: #ff3d00;
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.circle {
+  background: green;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 75px;
+  height: 150px;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+}
+
+.half-left {
+  background: green;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 75px;
+  height: 150px;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  transform-origin: center left;
+}
+
+.half-right {
+  background: #64dd17;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 76px;
+  height: 152px;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  transform-origin: center left;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.anim-left {
+  animation: rotate 10s 5s linear infinite, opacity 10s 5s steps(1, end) infinite;
+}
+
+.anim-right {
+  animation: rotate 10s linear infinite, opacity 10s steps(1, end) infinite;
+}
+
+.block {
+  position: relative;
+  height: 300px;
+  display: grid;
+  grid-template-rows: 33% 33% 30px;
+  grid-template-columns: 50px 50px;
+  grid-gap: 20px 40px;
+  justify-content: center;
+}
+.block h2,
+.block p {
+  grid-column: 1/3;
+}
+
+@media (max-width: 769px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px 30px;
+  }
+}
+@media (max-width: 450px) {
+  main {
+    grid-template-rows: 100% 150px 1fr;
+    grid-gap: 30px 10px;
+  }
+
+  .length:nth-child(2),
+  .length:nth-child(3) {
+    display: grid;
+    grid-template-rows: 40px 30px 30px;
+    grid-template-columns: 50px 50px;
+    grid-gap: 10px 20px;
+    justify-content: center;
+    border-radius: 10%;
+  }
+  .length:nth-child(2) .first-row,
+  .length:nth-child(2) .second-row,
+  .length:nth-child(3) .first-row,
+  .length:nth-child(3) .second-row {
+    grid-column: 1/3;
+  }
+  .length:nth-child(2) button:nth-of-type(1),
+  .length:nth-child(3) button:nth-of-type(1) {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+}
