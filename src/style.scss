@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Arvo|Lobster");
+$text-shadow: 2px 2px 5px green;
+$shadow: 1px 1px 8px 2px black;
+$border: green 5px double;
+body {
+  height: 700px;
+  background: radial-gradient(ellipse, green, yellow 20%, green 50%, red 99%);
+  color: white;
+  text-shadow: $text-shadow;
+  text-align: center;
+  font-family: "Arvo", serif;
+}
+@mixin grid ($cols,$rows,$gap) {
+  display: grid;
+  grid-template-rows: $rows;
+  grid-template-columns: $cols;
+  grid-gap: $gap;
+  justify-content: center;
+}
+main {
+  @include grid(210px 210px,100% 120px 300px, 30px 100px);
+}
+@mixin shadow($back:#64dd17,$rad:20px 5px,$border:$border) {
+  box-shadow: $shadow;
+  border: $border;
+  border-radius: $rad;
+  background-color: $back;
+}
+h1 {
+  font-family: "Lobster", "Abril Fatface", "Arvo", cursive;
+  @include shadow();
+  color: red;
+  background-image: radial-gradient(
+    rgb(180, 255, 30) 20%,
+    yellow 40%,
+    green 80%
+  );
+  grid-column: 1/3;
+}
+.length {
+  @include grid(50px 20px 50px,50px 30px,10px 20px);
+  @include shadow();
+}
+.second-row {
+  grid-column: 2/3;
+}
+.length:nth-child(2) {
+  border-radius: 0 50%;
+  button {
+    border-radius: 5px 20px;
+  }
+}
+.length:nth-child(3) {
+  border-radius: 50% 0;
+  button {
+    border-radius: 20px 5px;
+  }
+}
+.first-row {
+  grid-column: 1/4;
+}
+.time {
+  @include shadow(#64dd17,25%);
+  grid-column: 1/3;
+  position: relative;
+}
+button {
+  font-family: "Arvo", serif;
+  transition: 0.5s;
+  color: #ff3d00;
+  @include shadow(#eeff41,10px,green thin solid);
+  &:hover {
+    cursor: pointer;
+    background: yellow;
+    color: #f50057;
+    border-color: orange;
+  }
+  &:active {
+    box-shadow: none;
+    border-color: #ff3d00;
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  &::-moz-focus-inner {
+  border: 0;
+}
+}
+@mixin half($back,$width:75px,$height:150px) {
+  background: $back;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: $width;
+  height: $height;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+}
+.circle {
+  @include half(green);
+}
+.half-left {
+  @include half(green);
+  transform-origin: center left;
+}
+.half-right {
+  @include half(#64dd17,76px,152px);
+  transform-origin: center left;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.anim-left {
+  animation: rotate 10s 5s linear infinite,
+    opacity 10s 5s steps(1, end) infinite;
+}
+.anim-right {
+  animation: rotate 10s linear infinite, opacity 10s steps(1, end) infinite;
+}
+.block {
+  position: relative;
+  height: 300px;
+  @include grid(50px 50px,33% 33% 30px, 20px 40px);
+  h2,
+  p {
+    grid-column: 1/3;
+  }
+}
+@media (max-width: 769px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px 30px;
+  }
+}
+@media (max-width: 450px) {
+  main {
+    grid-template-rows: 100% 150px 1fr;
+    grid-gap: 30px 10px;
+  }
+  .length:nth-child(2),
+  .length:nth-child(3) {
+    @include grid(50px 50px,40px 30px 30px,10px 20px);
+    border-radius: 10%;
+    .first-row,
+    .second-row {
+      grid-column: 1/3;
+    }
+    button:nth-of-type(1) {
+      grid-row: 3/4;
+      grid-column: 1/2;
+    }
+  }
+}
